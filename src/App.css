@@ -13,6 +13,114 @@ body {
   justify-content: center;
   align-items: center;
   gap: 15px;
+
+  /* AVATAR PICKER */
+
+  .avatar-picker {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .avatar {
+    width: 45px;
+    height: 45px;
+    background: #2b2d31;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .avatar:hover {
+    background: #3a3d42;
+    transform: scale(1.1);
+  }
+
+  .avatar.selected {
+    border: 2px solid #5865f2;
+    background: #3a3d42;
+  }
+}
+/* MESSAGE LAYOUT */
+
+.msg {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  align-items: flex-start;
+}
+
+/* AVATAR BUBBLE */
+
+.avatar-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2b2d31;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* MESSAGE TEXT AREA */
+
+.msg-content {
+  display: flex;
+  flex-direction: column;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.user:hover {
+  background: #3a3d42;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1e1f22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  color: #ddd;
+  font-size: 14px;
+}
+.users {
+  padding: 10px 20px;
+  background: #2b2d31;
+  color: #ccc;
+  font-size: 14px;
+  border-bottom: 1px solid #3a3d42;
+}
+.msg-user {
+  font-weight: 600;
+  color: white;
+  font-size: 14px;
+}
+.msg:hover {
+  background: #2b2d31;
+  padding: 8px;
+  border-radius: 6px;
+}
+.msg-text {
+  color: #e3e3e3;
+  font-size: 15px;
 }
 
 .join h2 {
@@ -49,10 +157,15 @@ body {
 
 .chat {
   height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.chat-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
-
 /* MESSAGE AREA */
 
 .messages {
@@ -76,10 +189,24 @@ body {
 }
 
 /* INPUT BAR */
+.sidebar {
+  width: 220px;
+  background: #2b2d31;
+  padding: 20px;
+  border-right: 1px solid #3a3d42;
+  display: flex;
+  flex-direction: column;
+}
 
+.sidebar h3 {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
 .input {
   display: flex;
-  padding: 20px;
+  padding: 16px;
   background: #2b2d31;
   gap: 10px;
 }

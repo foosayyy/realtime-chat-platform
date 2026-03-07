@@ -11,6 +11,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [avatar, setAvatar] = useState("😀");
   const [typingUser, setTypingUser] = useState("");
+  const [users, setUsers] = useState([]);
 
   const joinRoom = () => {
     if (room !== "") {
@@ -25,6 +26,8 @@ function App() {
   };
 
   const sendMessage = () => {
+    if (message.trim() === "") return;
+
     const msg = {
       id: uuidv4(),
       room: room,
@@ -34,6 +37,7 @@ function App() {
     };
 
     socket.emit("send_message", msg);
+
     setMessage("");
   };
 
@@ -43,6 +47,10 @@ function App() {
     };
 
     socket.on("receive_message", handleMessage);
+
+    socket.on("room_users", (userList) => {
+      setUsers(userList);
+    });
 
     socket.on("user_typing", (name) => {
       setTypingUser(name);
@@ -73,45 +81,70 @@ function App() {
             onChange={(e) => setRoom(e.target.value)}
           />
 
-          <select onChange={(e) => setAvatar(e.target.value)}>
-            <option value="😀">😀</option>
-            <option value="😎">😎</option>
-            <option value="🤖">🤖</option>
-            <option value="🐱">🐱</option>
-            <option value="🐸">🐸</option>
-          </select>
+          <div className="avatar-picker">
+            {["😀", "😎", "🤖", "🐱", "🐸", "🐼", "👽"].map((a) => (
+              <div
+                key={a}
+                className={`avatar ${avatar === a ? "selected" : ""}`}
+                onClick={() => setAvatar(a)}
+              >
+                {a}
+              </div>
+            ))}
+          </div>
 
           <button onClick={joinRoom}>Join Room</button>
         </div>
       ) : (
         <div className="chat">
-          <div className="messages">
-            {messages.map((msg) => (
-              <div key={msg.id} className="msg">
-                <span>{msg.avatar}</span> <b>{msg.username}</b>: {msg.message}
+          <div className="sidebar">
+            <h3>Online</h3>
+
+            {users.map((user, i) => (
+              <div key={i} className="user">
+                <span className="user-avatar">{user.avatar}</span>
+                <span className="user-name">{user.username}</span>
               </div>
             ))}
           </div>
-          {typingUser && (
-            <div style={{ color: "#aaa", padding: "5px 20px" }}>
-              {typingUser} is typing...
+
+          <div className="chat-main">
+            <div className="messages">
+              {messages.map((msg) => (
+                <div key={msg.id} className="msg">
+                  <div className="avatar-bubble">{msg.avatar}</div>
+
+                  <div className="msg-content">
+                    <div className="msg-user">{msg.username}</div>
+                    <div className="msg-text">{msg.message}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          )}
-          <div className="input">
-            <input
-              value={message}
-              placeholder="message..."
-              onChange={(e) => {
-                setMessage(e.target.value);
 
-                socket.emit("typing", {
-                  room: room,
-                  username: username,
-                });
-              }}
-            />
+            {typingUser && (
+              <div className="typing">{typingUser} is typing...</div>
+            )}
 
-            <button onClick={sendMessage}>Send</button>
+            <div className="input">
+              <input
+                value={message}
+                placeholder="message..."
+                onChange={(e) => {
+                  setMessage(e.target.value);
+
+                  socket.emit("typing", {
+                    room: room,
+                    username: username,
+                  });
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") sendMessage();
+                }}
+              />
+
+              <button onClick={sendMessage}>Send</button>
+            </div>
           </div>
         </div>
       )}
