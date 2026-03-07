@@ -1,38 +1,107 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Arial;
+  background: #1e1f22;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* CENTER JOIN SCREEN */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.join {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  gap: 15px;
+}
+
+.join h2 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.join input,
+.join select {
+  width: 220px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #2b2d31;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.join button {
+  width: 220px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #5865f2;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.join button:hover {
+  background: #4752c4;
+}
+
+/* CHAT LAYOUT */
+
+.chat {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* MESSAGE AREA */
+
+.messages {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* INDIVIDUAL MESSAGE */
+
+.msg {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #e3e3e3;
+}
+
+.msg span {
+  font-size: 20px;
+}
+
+/* INPUT BAR */
+
+.input {
+  display: flex;
+  padding: 20px;
+  background: #2b2d31;
+  gap: 10px;
+}
+
+.input input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  background: #1e1f22;
+  color: white;
+}
+
+.input button {
+  padding: 12px 18px;
+  border-radius: 6px;
+  border: none;
+  background: #5865f2;
+  color: white;
+  cursor: pointer;
+}
+
+.input button:hover {
+  background: #4752c4;
 }
