@@ -1,17 +1,26 @@
 {
-  "name": "server",
+  "name": "socket-chat-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "start": "react-scripts start",
-  "build": "react-scripts build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "Realtime chat backend built with Express and Socket.io",
+  "main": "server.js",
   "type": "commonjs",
+  "scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+},
+  "keywords": [
+    "socket.io",
+    "chat",
+    "realtime",
+    "websocket",
+    "nodejs",
+    "express",
+    "chat-server",
+    "messaging",
+    "api"
+  ],
+  "author": "foosayyy",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1",
